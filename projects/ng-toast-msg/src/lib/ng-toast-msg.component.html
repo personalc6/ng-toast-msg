@@ -1,0 +1,5 @@
+<div class="toast-wrap">
+    <div class="msg-wrap" [class.show]="item?.show" *ngFor="let item of toast.list">
+        <span class="msg">{{item.msg}}</span>
+    </div>
+</div>

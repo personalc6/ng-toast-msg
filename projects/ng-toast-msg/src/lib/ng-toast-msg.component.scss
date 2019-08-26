@@ -1,0 +1,20 @@
+.toast-wrap {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+
+    .msg-wrap {
+        display: flex;
+        padding: 10px 30px;
+        margin: 0 0 15px 0;
+        border-radius: 8px;
+        background-color: #b0dba8;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.15);
+        transform: translate(-100%, 0);
+        transition: transform .4s;
+
+        &.show { transform: translate(0, 0); }
+    }
+}

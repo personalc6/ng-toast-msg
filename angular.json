@@ -2,5 +2,159 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ng-toast-msg": {
+      "projectType": "library",
+      "root": "projects/ng-toast-msg",
+      "sourceRoot": "projects/ng-toast-msg/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-toast-msg/tsconfig.lib.json",
+            "project": "projects/ng-toast-msg/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-toast-msg/src/test.ts",
+            "tsConfig": "projects/ng-toast-msg/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-toast-msg/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-toast-msg/tsconfig.lib.json",
+              "projects/ng-toast-msg/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-toast-msg-tester": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ng-toast-msg-tester",
+      "sourceRoot": "projects/ng-toast-msg-tester/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-toast-msg-tester",
+            "index": "projects/ng-toast-msg-tester/src/index.html",
+            "main": "projects/ng-toast-msg-tester/src/main.ts",
+            "polyfills": "projects/ng-toast-msg-tester/src/polyfills.ts",
+            "tsConfig": "projects/ng-toast-msg-tester/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ng-toast-msg-tester/src/favicon.ico",
+              "projects/ng-toast-msg-tester/src/assets"
+            ],
+            "styles": [
+              "projects/ng-toast-msg-tester/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-toast-msg-tester/src/environments/environment.ts",
+                  "with": "projects/ng-toast-msg-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-toast-msg-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-toast-msg-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-toast-msg-tester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-toast-msg-tester/src/test.ts",
+            "polyfills": "projects/ng-toast-msg-tester/src/polyfills.ts",
+            "tsConfig": "projects/ng-toast-msg-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-toast-msg-tester/karma.conf.js",
+            "assets": [
+              "projects/ng-toast-msg-tester/src/favicon.ico",
+              "projects/ng-toast-msg-tester/src/assets"
+            ],
+            "styles": [
+              "projects/ng-toast-msg-tester/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-toast-msg-tester/tsconfig.app.json",
+              "projects/ng-toast-msg-tester/tsconfig.spec.json",
+              "projects/ng-toast-msg-tester/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ng-toast-msg-tester/e2e/protractor.conf.js",
+            "devServerTarget": "ng-toast-msg-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-toast-msg-tester:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ng-toast-msg"
 }
